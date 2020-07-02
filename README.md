@@ -4,11 +4,23 @@ Lightweight, [mysql2][1]/[promise][2] based layer for easier database manipulati
 
 Inspired by PHP's awesome [dg/digi][3].
 
+#### Method changes over mysql2
+
+- [query](#query)
+- [execute](#execute)
+- [single](#single-result)
+- [assoc](#associative-results)
+- [pairs](#key-value-pairs)
+
 ------
 
-### Examples
+## Code examples
 
-#### Connection
+#### Installation
+
+```
+npm -i mysql21
+```
 
 ```js
 // TypeScript
@@ -16,7 +28,11 @@ import { mysql21 } from 'mysql21';
 
 // Node.js
 const { mysql21 } = require("mysql21");
+``` 
 
+#### Connection
+
+```js
 const opts = {
   host: 'localhost',
   user: 'test',
@@ -54,19 +70,18 @@ connection.query('INSERT INTO listings (data) VALUES ?', [[[JSON.stringify({titl
 > 4
 ```
 
-Query drops fields definitions from result.
-If you want it back, use `defQuery()` or
-`defExecute()` instead, triggering mysql2's
-original methods, which return `[result, fields]`.
+#### Execute
 
-On the other hand, it returns much missing
-`Error.sql` formatted string for any chance
-of actual debugging.
+```js
+connection.execute('SELECT ?', ['execute'])
+  .then(console.log);
+> execute
+```
 
 #### Single result
 
 ```js
-connection.query('SELECT 1')
+connection.single('SELECT 1')
   .then(console.log);
 > 1
 ```
@@ -90,8 +105,31 @@ connection.pairs('id', 'value', "SELECT 1 as id, 'one' as value UNION SELECT 2, 
 > { '1': 'one', '2': 'two' }
 ```
 
-Other methods follow their [mysql2][1] origin.
+## API
+
+Methods not described above follow their [mysql2][1] 
+origin within it's [promise][2] wrapper.
+
+Notice: `query()` and `execute()` drop field 
+definitions from result for cleaner result parsing.
+
+If you want them back, use `defQuery()` or
+`defExecute()` instead, triggering mysql2's
+original methods, which return `[result, fields]`.
+
+## Error Handling
+
+Simply `catch` the Errors as thrown by `mysql2`. 
+
+They now have `sql` property of formatted string
+for a chance of better debugging :-)
+
+## Acknowledgements
+
+  - Original @sidorares [mysql2][1] library
+  - Awesome @dg [dibi][3] PHP library, I've been using for years  
 
 [1]: https://www.npmjs.com/package/mysql2
 [2]: https://www.npmjs.com/package/mysql2#using-promise-wrapper
 [3]: https://github.com/dg/dibi
+

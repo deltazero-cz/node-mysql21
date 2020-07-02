@@ -116,6 +116,7 @@ const testMe: Array<Array<any>> = [
     it('should not contain original row values', () => expect(read['1']).to.not.have.own.property('id'));
     it('should contain data column directly', () => expect(read['1']).to.have.own.property('title'));
   }],
+  ['Drop table', () => it("drop listings", () => expect(async () => await connection.query("DROP TABLE listings")).not.to.throw())],
   ['???', () => it('is unknown', () => expect(undefined).to.be.undefined)],
   ['end connection with PROFIT', () => it('at least you have hope', () =>
       expect(async () => await connection.end()).not.to.throw())]

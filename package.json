@@ -1,14 +1,13 @@
 {
   "name": "mysql21",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "MySQL 2.1",
   "author": "ΔO - David Obdržálek <david@deltazero.cz>",
   "license": "ISC",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "start": "tsc -b && node lib/index.js",
-    "test": "tsc -b && mocha 'lib/tests/test.js'",
+    "test": "mocha lib/tests",
     "build": "tsc -b",
     "prepare": "npm run build"
   },
