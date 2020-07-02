@@ -10,7 +10,7 @@ Inspired by PHP's awesome [dg/digi][3].
 
 #### Connection
 
-```
+```js
 // TypeScript
 import { mysql21 } from 'mysql21';
 
@@ -36,8 +36,7 @@ let connection = await mysql21.createPool(opts);
 
 #### Query
 
-```
-
+```js
 // either await
 
 let query = await connection.query('SELECT 1');
@@ -66,7 +65,7 @@ of actual debugging.
 
 #### Single result
 
-```
+```js
 connection.query('SELECT 1')
   .then(console.log);
 > 1
@@ -74,7 +73,7 @@ connection.query('SELECT 1')
 
 #### Associative results
 
-```
+```js
 connection.assoc('id', "SELECT 1 as id, 'one' as value UNION SELECT 2, 'two'")
       .then(console.log);
 > {
@@ -85,7 +84,7 @@ connection.assoc('id', "SELECT 1 as id, 'one' as value UNION SELECT 2, 'two'")
 
 #### Key-Value Pairs
 
-```
+```js
 connection.pairs('id', 'value', "SELECT 1 as id, 'one' as value UNION SELECT 2, 'two'")
       .then(console.log);
 > { '1': 'one', '2': 'two' }
