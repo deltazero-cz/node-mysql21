@@ -7,21 +7,24 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "example": "node lib/example.js",
-    "test": "mocha lib/test",
+    "start": "tsc -b && node lib/index.js",
+    "test": "tsc -b && mocha 'lib/tests/test.js'",
     "build": "tsc -b",
     "prepare": "npm run build"
   },
-  "keywords": [
-    "node",
-    "mysql",
-    "mysql2"
-  ],
-  "repository": "deltazero-cz/node-object-string-query",
+  "repository": "deltazero-cz/node-mysql21",
+  "dependencies": {
+    "mysql2": "^2.1.0"
+  },
   "devDependencies": {
     "@types/mocha": "^7.0.1",
     "chai": "^4.2.0",
     "mocha": "^8.0.1",
     "typescript": "^3.8.3"
-  }
+  },
+  "keywords": [
+    "node",
+    "mysql",
+    "mysql2"
+  ]
 }
